@@ -51,45 +51,50 @@ class ViewController: UIViewController {
     @IBOutlet weak var guess64: UITextField!
     @IBOutlet weak var guess65: UITextField!
     
-    var listOfTF:[UITextField] = []
+//    Dictonary of all the guesses text fields
     var dictOfTextFields: [Int: UITextField] = [:]
     var selectedTF: UITextField?
     
+    var selectedTFcoutRef: Int = 1;
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictOfTextFields[11] = guess11
-        dictOfTextFields[12] = guess12
-        dictOfTextFields[13] = guess13
-        dictOfTextFields[14] = guess14
-        dictOfTextFields[15] = guess15
-        dictOfTextFields[21] = guess21
-        dictOfTextFields[22] = guess22
-        dictOfTextFields[23] = guess23
-        dictOfTextFields[24] = guess24
-        dictOfTextFields[25] = guess25
-        dictOfTextFields[31] = guess31
-        dictOfTextFields[32] = guess32
-        dictOfTextFields[33] = guess33
-        dictOfTextFields[34] = guess34
-        dictOfTextFields[35] = guess35
-        dictOfTextFields[41] = guess41
-        dictOfTextFields[42] = guess42
-        dictOfTextFields[43] = guess43
-        dictOfTextFields[44] = guess44
-        dictOfTextFields[45] = guess45
-        dictOfTextFields[51] = guess51
-        dictOfTextFields[52] = guess52
-        dictOfTextFields[53] = guess53
-        dictOfTextFields[54] = guess54
-        dictOfTextFields[55] = guess55
-        dictOfTextFields[61] = guess61
-        dictOfTextFields[62] = guess62
-        dictOfTextFields[63] = guess63
-        dictOfTextFields[64] = guess64
-        dictOfTextFields[65] = guess65
+        dictOfTextFields[1] = guess11
+        dictOfTextFields[2] = guess12
+        dictOfTextFields[3] = guess13
+        dictOfTextFields[4] = guess14
+        dictOfTextFields[5] = guess15
+        dictOfTextFields[6] = guess21
+        dictOfTextFields[7] = guess22
+        dictOfTextFields[8] = guess23
+        dictOfTextFields[9] = guess24
+        dictOfTextFields[10] = guess25
+        dictOfTextFields[11] = guess31
+        dictOfTextFields[12] = guess32
+        dictOfTextFields[13] = guess33
+        dictOfTextFields[14] = guess34
+        dictOfTextFields[15] = guess35
+        dictOfTextFields[16] = guess41
+        dictOfTextFields[17] = guess42
+        dictOfTextFields[18] = guess43
+        dictOfTextFields[19] = guess44
+        dictOfTextFields[20] = guess45
+        dictOfTextFields[21] = guess51
+        dictOfTextFields[22] = guess52
+        dictOfTextFields[23] = guess53
+        dictOfTextFields[24] = guess54
+        dictOfTextFields[25] = guess55
+        dictOfTextFields[26] = guess61
+        dictOfTextFields[27] = guess62
+        dictOfTextFields[28] = guess63
+        dictOfTextFields[29] = guess64
+        dictOfTextFields[30] = guess65
         // Do any additional setup after loading the view.
-       
-        
+        initializeDefaultTextField()
+        makeTextFieldSelected(pos: 1)
+    }
+    
+    
+    func initializeDefaultTextField(){
         for (pos,item) in dictOfTextFields {
             item.layer.borderColor = UIColor.lightGray.cgColor
             item.layer.borderWidth = 2.0
@@ -97,10 +102,169 @@ class ViewController: UIViewController {
             item.isEnabled = false
         }
     }
+    func makeTextFieldSelected(pos: Int){
+        dictOfTextFields[pos]?.layer.borderColor = UIColor.darkGray.cgColor
+    }
+    @IBAction func keyboardKeyPressed(_ sender: UIButton) {
+//       Code to handle keypress will go here
+        
+        var key: String = "a";
+        var isErase: Bool = false
+        switch sender.tag{
+        case 1: // Q
+            key = "Q"
+            print("Q pressed")
+            break;
+        case 2: // W
+            key = "W"
+            print("W pressed")
+            break
+        case 3: // E
+            key = "E"
+            print("E pressed")
+            break
+        case 4: // R
+            key = "R"
+            print("R pressed")
+            break
+        case 5: // T
+            key = "T"
+            print("T pressed")
+            break
+        case 6: // Y
+            key = "Y"
+            print("Y pressed")
+            break
+        case 7: // U
+            key = "U"
+            print("U pressed")
+            break
+        case 8: // I
+            key = "I"
+            print("I pressed")
+            break
+        case 9: // O
+            key = "O"
+            print("O pressed")
+            break
+        case 10: // P
+            key = "P"
+            print("P pressed")
+            break
+        case 11: // A
+            key = "A"
+            print("A pressed")
+            break
+        case 12: // S
+            key = "S"
+            print("S pressed")
+            break
+        case 13: // D
+            key = "D"
+            print("D pressed")
+            break
+        case 14: // F
+            key = "F"
+            print("F pressed")
+            break
+        case 15: // G
+            key = "G"
+            print("G pressed")
+            break
+        case 16: // H
+            key = "H"
+            print("H pressed")
+            break
+        case 17: // J
+            key = "J"
+            print("J pressed")
+            break
+        case 18: // K
+            key = "K"
+            print("K pressed")
+            break
+        case 19: // L
+            key = "L"
+            print("L pressed")
+            break
+        case 20: // Z
+            key = "Z"
+            print("Z pressed")
+            break
+        case 21: // X
+            key = "X"
+            print("X pressed")
+            break
+        case 22: // C
+            key = "C"
+            print("C pressed")
+            break
+        case 23: // V
+            key = "V"
+            print("V pressed")
+            break
+        case 24: // B
+            key = "B"
+            print("B pressed")
+            break
+        case 25: //N
+            key = "N"
+            print("N pressed")
+            break
+        case 26: //M
+            key = "M"
+            print("M pressed")
+            break
+        case 27: // Delete
+            print("Delete pressed")
+            isErase = true
+            break
+        default:
+            key = "A"
+            break;
+        }
+        
+        writeToGuess(word: key, isErase: isErase)
+    }
     
-    func initializeDefaultTextField(_ :UITextField){
+    @IBAction func submitButton(_ sender: Any) {
+        print("Submit pressed")
+    }
+    
+    func writeToGuess(word: String, isErase: Bool){
+        
+        print(word)
+        if(isErase && selectedTFcoutRef >= 1 ){
+          
+            
+            
+            if(selectedTFcoutRef > 1){
+                selectedTFcoutRef -= 1
+                initializeDefaultTextField()
+                makeTextFieldSelected(pos: selectedTFcoutRef)
+                dictOfTextFields[selectedTFcoutRef]?.text = ""
+                
+            }else{
+                initializeDefaultTextField()
+                makeTextFieldSelected(pos: 1)
+                selectedTFcoutRef = 1
+                dictOfTextFields[selectedTFcoutRef]?.text = ""
+            }
+            
+
+        }
+        else if (!isErase &&  selectedTFcoutRef >= 1){
+            dictOfTextFields[selectedTFcoutRef]?.text = word
+            selectedTFcoutRef += 1
+            initializeDefaultTextField()
+            makeTextFieldSelected(pos: selectedTFcoutRef)
+            //            we can change background color of specific text field here
+        }
+        print("index: ",selectedTFcoutRef)
         
     }
-
+    
+    
+    
 }
 
