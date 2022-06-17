@@ -91,7 +91,7 @@ class ViewController: UIViewController {
        
         
         for (pos,item) in dictOfTextFields {
-            item.layer.borderColor = UIColor.darkGray.cgColor
+            item.layer.borderColor = UIColor.lightGray.cgColor
             item.layer.borderWidth = 2.0
             item.layer.cornerRadius = 5
             item.isEnabled = false
