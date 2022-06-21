@@ -614,7 +614,7 @@
                                                                     <action selector="keyboardKeyPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bLE-H0-iSN"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qD9-cz-MBu">
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qD9-cz-MBu">
                                                                 <rect key="frame" x="82.333333333333329" y="0.0" width="38" height="50"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="filled" title="E"/>
@@ -893,6 +893,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnBack" destination="LUW-ne-gYV" id="1sp-wL-1dr"/>
+                        <outlet property="btnSubmit" destination="d8e-6B-hIp" id="WW4-tL-gXZ"/>
                         <outlet property="guess11" destination="Y4f-bw-5O9" id="aMo-ef-RUp"/>
                         <outlet property="guess12" destination="l8S-aL-vff" id="Okr-hK-Q6y"/>
                         <outlet property="guess13" destination="9LH-zB-XZc" id="lk7-2a-A80"/>

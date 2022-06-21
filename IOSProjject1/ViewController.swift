@@ -51,13 +51,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var guess64: UITextField!
     @IBOutlet weak var guess65: UITextField!
     
-//    Dictonary of all the guesses text fields
+// for button disable and enable
+    @IBOutlet weak var btnSubmit: UIButton!
+    @IBOutlet weak var btnBack: UIButton!
+    //    Dictonary of all the guesses text fields
     var dictOfTextFields: [Int: UITextField] = [:]
     var selectedTF: UITextField?
     
     var selectedTFcoutRef: Int = 1;
+    
+    var selectedIndex: [Int] = []
+    var selectedWord: [String] = []
+    var dummyArray: [String] = ["MONEY", "LILLY", "VOGUE", "SHINE", "JIMMY"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnSubmit.isEnabled = false
+
         dictOfTextFields[1] = guess11
         dictOfTextFields[2] = guess12
         dictOfTextFields[3] = guess13
@@ -91,6 +102,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         initializeDefaultTextField()
         makeTextFieldSelected(pos: 1)
+        
     }
     
     
@@ -104,12 +116,15 @@ class ViewController: UIViewController {
     }
     func makeTextFieldSelected(pos: Int){
         dictOfTextFields[pos]?.layer.borderColor = UIColor.darkGray.cgColor
+        
     }
     @IBAction func keyboardKeyPressed(_ sender: UIButton) {
 //       Code to handle keypress will go here
-        
-        var key: String = "a";
         var isErase: Bool = false
+        btnBack.isEnabled = true
+
+        var key: String = "a";
+       
         switch sender.tag{
         case 1: // Q
             key = "Q"
@@ -228,7 +243,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: Any) {
+        
         print("Submit pressed")
+        for item in selectedIndex {
+            print("selectedIndex: \(item)")
+            
+        }
+        for word in selectedWord {
+            print("Selected word:\(word)")
+        }
+        let myFirstWord = selectedWord.joined(separator: "")
+        //print(selectedWord.contains(selectedWord))
+        print(myFirstWord)
+
+        if(dummyArray.contains(myFirstWord)){
+            let alert = UIAlertController(title: title, message: "You are Successfully added first word", preferredStyle: UIAlertController.Style.alert)
+               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                   print("Action")
+                   self.selectedIndex.removeAll()
+                   self.selectedWord.removeAll()
+                   self.btnBack.isEnabled = false
+               }))
+            self.present(alert, animated: true, completion: nil)
+
+        }else{
+            let alert = UIAlertController(title: title, message: "Word doesn't match, Please Try again", preferredStyle: UIAlertController.Style.alert)
+               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                   print("Action")
+                   self.btnBack.isEnabled = false
+
+               }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func writeToGuess(word: String, isErase: Bool){
@@ -239,19 +285,27 @@ class ViewController: UIViewController {
             
             
             if(selectedTFcoutRef > 1){
+                
                 selectedTFcoutRef -= 1
                 initializeDefaultTextField()
                 makeTextFieldSelected(pos: selectedTFcoutRef)
                 dictOfTextFields[selectedTFcoutRef]?.text = ""
-                
+
+                if(selectedWord.count > 0){
+                    selectedWord.remove(at: selectedWord.count-1)
+                }
+                if(selectedIndex.count>0){
+                    selectedIndex.remove(at: selectedIndex.count-1)
+
+                }
             }else{
                 initializeDefaultTextField()
                 makeTextFieldSelected(pos: 1)
                 selectedTFcoutRef = 1
                 dictOfTextFields[selectedTFcoutRef]?.text = ""
+
             }
             
-
         }
         else if (!isErase &&  selectedTFcoutRef >= 1){
             dictOfTextFields[selectedTFcoutRef]?.text = word
@@ -259,8 +313,16 @@ class ViewController: UIViewController {
             initializeDefaultTextField()
             makeTextFieldSelected(pos: selectedTFcoutRef)
             //            we can change background color of specific text field here
+            selectedIndex.append(selectedTFcoutRef)
+            selectedWord.append(word)
+
         }
         print("index: ",selectedTFcoutRef)
+        if(selectedIndex.count == 5){
+            btnSubmit.isEnabled = true
+        }else{
+            btnSubmit.isEnabled = false
+        }
         
     }
     
