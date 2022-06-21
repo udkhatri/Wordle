@@ -60,15 +60,12 @@ class ViewController: UIViewController {
     
     var selectedTFcoutRef: Int = 1;
     
-    var selectedIndex: [Int] = []
     var selectedWord: [String] = []
     var dummyArray: [String] = ["MONEY", "LILLY", "VOGUE", "SHINE", "JIMMY"]
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         btnSubmit.isEnabled = false
-
         dictOfTextFields[1] = guess11
         dictOfTextFields[2] = guess12
         dictOfTextFields[3] = guess13
@@ -121,10 +118,9 @@ class ViewController: UIViewController {
     @IBAction func keyboardKeyPressed(_ sender: UIButton) {
 //       Code to handle keypress will go here
         var isErase: Bool = false
-        btnBack.isEnabled = true
-
-        var key: String = "a";
-       
+        
+        var key: String = "A";
+        if(!btnSubmit.isEnabled){
         switch sender.tag{
         case 1: // Q
             key = "Q"
@@ -235,34 +231,33 @@ class ViewController: UIViewController {
             isErase = true
             break
         default:
-            key = "A"
+            key = ""
             break;
         }
         
         writeToGuess(word: key, isErase: isErase)
+        }
+//        if submit button is enabled and pressed delete then again disable submit button and delete last element from selectedWord
+        else if(btnSubmit.isEnabled && sender.tag == 27 && selectedWord.count == 5){
+            writeToGuess(word: "", isErase: true)
+            if(selectedWord.count != 5){
+                btnSubmit.isEnabled = false
+            }
+        }
     }
     
     @IBAction func submitButton(_ sender: Any) {
         
-        print("Submit pressed")
-        for item in selectedIndex {
-            print("selectedIndex: \(item)")
-            
-        }
-        for word in selectedWord {
-            print("Selected word:\(word)")
-        }
+        print("Submit pressed",selectedWord)
+        btnSubmit.isEnabled = false
+        
         let myFirstWord = selectedWord.joined(separator: "")
-        //print(selectedWord.contains(selectedWord))
         print(myFirstWord)
 
         if(dummyArray.contains(myFirstWord)){
             let alert = UIAlertController(title: title, message: "You are Successfully added first word", preferredStyle: UIAlertController.Style.alert)
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    print("Action")
-                   self.selectedIndex.removeAll()
-                   self.selectedWord.removeAll()
-                   self.btnBack.isEnabled = false
                }))
             self.present(alert, animated: true, completion: nil)
 
@@ -270,34 +265,29 @@ class ViewController: UIViewController {
             let alert = UIAlertController(title: title, message: "Word doesn't match, Please Try again", preferredStyle: UIAlertController.Style.alert)
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    print("Action")
-                   self.btnBack.isEnabled = false
 
                }))
             self.present(alert, animated: true, completion: nil)
         }
+        selectedWord.removeAll()
     }
     
     func writeToGuess(word: String, isErase: Bool){
         
-        print(word)
+        print("letter is: ",word)
+        
         if(isErase && selectedTFcoutRef >= 1 ){
-          
-            
-            
             if(selectedTFcoutRef > 1){
+                if(!selectedWord.isEmpty){
+                    selectedTFcoutRef -= 1
+                    initializeDefaultTextField()
+                    makeTextFieldSelected(pos: selectedTFcoutRef)
+                    dictOfTextFields[selectedTFcoutRef]?.text = ""
+//                    remove last word from selected array
+                    let last = selectedWord.popLast() ?? "Empty array"
+                    print("word is: ",selectedWord, selectedWord.count)
+                }
                 
-                selectedTFcoutRef -= 1
-                initializeDefaultTextField()
-                makeTextFieldSelected(pos: selectedTFcoutRef)
-                dictOfTextFields[selectedTFcoutRef]?.text = ""
-
-                if(selectedWord.count > 0){
-                    selectedWord.remove(at: selectedWord.count-1)
-                }
-                if(selectedIndex.count>0){
-                    selectedIndex.remove(at: selectedIndex.count-1)
-
-                }
             }else{
                 initializeDefaultTextField()
                 makeTextFieldSelected(pos: 1)
@@ -313,16 +303,15 @@ class ViewController: UIViewController {
             initializeDefaultTextField()
             makeTextFieldSelected(pos: selectedTFcoutRef)
             //            we can change background color of specific text field here
-            selectedIndex.append(selectedTFcoutRef)
             selectedWord.append(word)
 
         }
-        print("index: ",selectedTFcoutRef)
-        if(selectedIndex.count == 5){
-            btnSubmit.isEnabled = true
-        }else{
-            btnSubmit.isEnabled = false
-        }
+        print("index: ",selectedWord.count)
+        //        If user fills all the words of the guess, disable all the text fields
+                if(selectedWord.count == 5){
+                    initializeDefaultTextField()
+                    btnSubmit.isEnabled = true
+                }
         
     }
     
