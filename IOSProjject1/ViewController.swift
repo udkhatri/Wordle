@@ -102,6 +102,28 @@ class ViewController: UIViewController {
         
     }
     
+    // call this when you want generate a new word
+    func loadWords() -> String {
+        var fiveLetterWordArray:[String]?
+        var result = ""
+        //if you get access to the directory
+        if let fileLocation = Bundle.main.url(forResource: "fiveLetterWords", withExtension: "txt"){
+            
+            // do catch in case of an error
+            do{
+
+                result = try String(contentsOf: fileLocation, encoding: .utf8)
+            }
+            catch{
+                print(error)
+            }
+            fiveLetterWordArray = result.components(separatedBy: "\n")
+        }
+        
+        let randomWordIndex = Int.random(in: 0..<5756)
+        //returns a random word in form of a string
+        return fiveLetterWordArray?[randomWordIndex] ?? "money"
+        }
     
     func initializeDefaultTextField(){
         for (pos,item) in dictOfTextFields {

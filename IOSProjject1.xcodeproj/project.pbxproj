@@ -13,6 +13,7 @@
 		5E8A721D2845AAB10065588E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E8A721B2845AAB10065588E /* Main.storyboard */; };
 		5E8A721F2845AAB40065588E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E8A721E2845AAB40065588E /* Assets.xcassets */; };
 		5E8A72222845AAB40065588E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E8A72202845AAB40065588E /* LaunchScreen.storyboard */; };
+		876DC9B5286287F500585960 /* fiveLetterWords.txt in Resources */ = {isa = PBXBuildFile; fileRef = 876DC9B4286287F400585960 /* fiveLetterWords.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		5E8A721E2845AAB40065588E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E8A72212845AAB40065588E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E8A72232845AAB40065588E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		876DC9B4286287F400585960 /* fiveLetterWords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fiveLetterWords.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				5E8A721E2845AAB40065588E /* Assets.xcassets */,
 				5E8A72202845AAB40065588E /* LaunchScreen.storyboard */,
 				5E8A72232845AAB40065588E /* Info.plist */,
+				876DC9B4286287F400585960 /* fiveLetterWords.txt */,
 			);
 			path = IOSProjject1;
 			sourceTree = "<group>";
@@ -127,6 +130,7 @@
 			files = (
 				5E8A72222845AAB40065588E /* LaunchScreen.storyboard in Resources */,
 				5E8A721F2845AAB40065588E /* Assets.xcassets in Resources */,
+				876DC9B5286287F500585960 /* fiveLetterWords.txt in Resources */,
 				5E8A721D2845AAB10065588E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
