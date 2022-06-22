@@ -269,15 +269,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: Any) {
-        
+        // Calling the viewDidLoad methods to "refresh" the VC
         print("Submit pressed",selectedWord)
+      
         btnSubmit.isEnabled = false
         
         let myFirstWord = selectedWord.joined(separator: "")
         print(myFirstWord)
 
         if(dummyArray.contains(myFirstWord)){
-            let alert = UIAlertController(title: title, message: "You are Successfully added first word", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: title, message: "You are Successfully added word", preferredStyle: UIAlertController.Style.alert)
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    print("Action")
                }))
@@ -292,6 +293,14 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         selectedWord.removeAll()
+        
+        if(!(dictOfTextFields[30]?.text?.isEmpty ?? false)){
+            clearTextFields()
+            initializeDefaultTextField()
+            makeTextFieldSelected(pos: 1)
+            //super.viewDidLoad()
+
+        }
     }
     
     func writeToGuess(word: String, isErase: Bool){
@@ -336,8 +345,16 @@ class ViewController: UIViewController {
                 }
         
     }
-    
-    
+    func clearTextFields(){
+            for (pos,item) in dictOfTextFields {
+                item.layer.borderColor = UIColor.lightGray.cgColor
+                item.layer.borderWidth = 2.0
+                item.layer.cornerRadius = 5
+                item.isEnabled = false
+                item.text = ""
+            }
+        }
+ 
     
 }
 
