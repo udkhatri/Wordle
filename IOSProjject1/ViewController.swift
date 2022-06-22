@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     var selectedTFcoutRef: Int = 1;
     
     var selectedWord: [String] = []
-    var dummyArray: [String] = ["MONEY", "LILLY", "VOGUE", "SHINE", "JIMMY"]
+
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -277,7 +277,11 @@ class ViewController: UIViewController {
         let myFirstWord = selectedWord.joined(separator: "")
         print(myFirstWord)
 
-        if(dummyArray.contains(myFirstWord)){
+        var randomWord = loadWords()
+        print(randomWord)
+        
+        //matching random word with user input
+        if(randomWord == myFirstWord.lowercased()){
             let alert = UIAlertController(title: title, message: "You are Successfully added word", preferredStyle: UIAlertController.Style.alert)
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    print("Action")
@@ -294,11 +298,10 @@ class ViewController: UIViewController {
         }
         selectedWord.removeAll()
         
+        //resetting game
         if(!(dictOfTextFields[30]?.text?.isEmpty ?? false)){
             clearTextFields()
-            initializeDefaultTextField()
             makeTextFieldSelected(pos: 1)
-            //super.viewDidLoad()
 
         }
     }
@@ -353,6 +356,8 @@ class ViewController: UIViewController {
                 item.isEnabled = false
                 item.text = ""
             }
+        selectedTFcoutRef = 1
+
         }
  
     
