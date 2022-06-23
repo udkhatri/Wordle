@@ -8,8 +8,36 @@
 import UIKit
 
 class ViewController: UIViewController {
-    //added first button for testing, it works so we can just add others to finish that functionality
+    //FIRST KEYBOARD ROW
     @IBOutlet weak var Q: UIButton!
+    @IBOutlet weak var W: UIButton!
+    @IBOutlet weak var E: UIButton!
+    @IBOutlet weak var R: UIButton!
+    @IBOutlet weak var T: UIButton!
+    @IBOutlet weak var Y: UIButton!
+    @IBOutlet weak var U: UIButton!
+    @IBOutlet weak var I: UIButton!
+    @IBOutlet weak var O: UIButton!
+    @IBOutlet weak var P: UIButton!
+    //SECOND KEYBOARD ROW
+    @IBOutlet weak var A: UIButton!
+    @IBOutlet weak var S: UIButton!
+    @IBOutlet weak var D: UIButton!
+    @IBOutlet weak var F: UIButton!
+    @IBOutlet weak var G: UIButton!
+    @IBOutlet weak var H: UIButton!
+    @IBOutlet weak var J: UIButton!
+    @IBOutlet weak var K: UIButton!
+    @IBOutlet weak var L: UIButton!
+    //THIRD KEYBOARD ROW
+    @IBOutlet weak var Z: UIButton!
+    @IBOutlet weak var X: UIButton!
+    @IBOutlet weak var C: UIButton!
+    @IBOutlet weak var V: UIButton!
+    @IBOutlet weak var B: UIButton!
+    @IBOutlet weak var N: UIButton!
+    @IBOutlet weak var M: UIButton!
+    
     //    for first guess
     @IBOutlet weak var guess15: UITextField!
     @IBOutlet weak var guess14: UITextField!

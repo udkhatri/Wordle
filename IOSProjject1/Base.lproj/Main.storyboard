@@ -893,7 +893,32 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="A" destination="2N2-6v-Mu6" id="89Q-gj-6Oi"/>
+                        <outlet property="B" destination="76y-b1-F4E" id="JU2-5N-vq2"/>
+                        <outlet property="C" destination="d5E-em-Rq9" id="QJr-md-I5T"/>
+                        <outlet property="D" destination="C1w-CA-3Hc" id="IW0-IX-hlx"/>
+                        <outlet property="E" destination="qD9-cz-MBu" id="hVi-EC-SeK"/>
+                        <outlet property="F" destination="buG-MG-bqX" id="F1I-jL-QgF"/>
+                        <outlet property="G" destination="mOm-MW-pAu" id="Y9p-67-5bl"/>
+                        <outlet property="H" destination="r73-Eq-aYd" id="1BX-kD-7yW"/>
+                        <outlet property="I" destination="hYw-zu-gm9" id="UFH-ja-geH"/>
+                        <outlet property="J" destination="VjC-dh-SbU" id="3ga-uE-MsE"/>
+                        <outlet property="K" destination="PZh-SP-y7h" id="NUW-VL-8Wa"/>
+                        <outlet property="L" destination="dGh-xc-uPL" id="TsR-6s-kSr"/>
+                        <outlet property="M" destination="IZh-Qi-5z1" id="RBj-Vr-ubY"/>
+                        <outlet property="N" destination="zmo-ja-HR1" id="N7W-MO-bgy"/>
+                        <outlet property="O" destination="U29-DQ-nQf" id="d0b-wZ-nb2"/>
+                        <outlet property="P" destination="LjA-Hq-vXS" id="gGQ-Rc-vfm"/>
                         <outlet property="Q" destination="n7F-Dz-mm6" id="bT9-A0-KWR"/>
+                        <outlet property="R" destination="Rpz-oe-uy6" id="9Ku-zD-XK3"/>
+                        <outlet property="S" destination="k8e-oI-mSw" id="Wrm-ve-r1l"/>
+                        <outlet property="T" destination="l8f-ut-Gpy" id="JwM-9d-XT9"/>
+                        <outlet property="U" destination="D0X-VQ-8wp" id="12W-ed-eLv"/>
+                        <outlet property="V" destination="qnW-ZU-Yuo" id="BId-vx-isr"/>
+                        <outlet property="W" destination="Iv3-Yy-aDA" id="q9P-6E-CKh"/>
+                        <outlet property="X" destination="NEi-7l-aei" id="PpQ-Fq-PLu"/>
+                        <outlet property="Y" destination="N7o-D1-4kD" id="QLF-Hb-bCX"/>
+                        <outlet property="Z" destination="Avj-Nd-fbR" id="vSb-kt-1Ju"/>
                         <outlet property="btnBack" destination="LUW-ne-gYV" id="1sp-wL-1dr"/>
                         <outlet property="btnSubmit" destination="d8e-6B-hIp" id="WW4-tL-gXZ"/>
                         <outlet property="guess11" destination="Y4f-bw-5O9" id="aMo-ef-RUp"/>
