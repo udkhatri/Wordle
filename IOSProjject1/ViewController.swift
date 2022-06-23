@@ -100,7 +100,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         btnSubmit.isEnabled = false
-        dictOfKeyboardBtn["q"] = Q
         dictOfTextFields[1] = guess11
         dictOfTextFields[2] = guess12
         dictOfTextFields[3] = guess13
@@ -131,6 +130,35 @@ class ViewController: UIViewController {
         dictOfTextFields[28] = guess63
         dictOfTextFields[29] = guess64
         dictOfTextFields[30] = guess65
+        
+        //keyboard buttons
+        dictOfKeyboardBtn["q"] = Q
+        dictOfKeyboardBtn["w"] = W
+        dictOfKeyboardBtn["e"] = E
+        dictOfKeyboardBtn["r"] = R
+        dictOfKeyboardBtn["t"] = T
+        dictOfKeyboardBtn["y"] = Y
+        dictOfKeyboardBtn["u"] = U
+        dictOfKeyboardBtn["i"] = I
+        dictOfKeyboardBtn["o"] = O
+        dictOfKeyboardBtn["p"] = P
+        dictOfKeyboardBtn["a"] = A
+        dictOfKeyboardBtn["s"] = S
+        dictOfKeyboardBtn["d"] = D
+        dictOfKeyboardBtn["f"] = F
+        dictOfKeyboardBtn["g"] = G
+        dictOfKeyboardBtn["h"] = H
+        dictOfKeyboardBtn["j"] = J
+        dictOfKeyboardBtn["k"] = K
+        dictOfKeyboardBtn["l"] = L
+        dictOfKeyboardBtn["z"] = Z
+        dictOfKeyboardBtn["x"] = X
+        dictOfKeyboardBtn["c"] = C
+        dictOfKeyboardBtn["v"] = V
+        dictOfKeyboardBtn["b"] = B
+        dictOfKeyboardBtn["n"] = N
+        dictOfKeyboardBtn["m"] = M
+        
         // Do any additional setup after loading the view.
         initializeDefaultTextField()
         makeTextFieldSelected(pos: 1)
