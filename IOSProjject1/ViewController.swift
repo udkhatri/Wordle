@@ -199,6 +199,7 @@ class ViewController: UIViewController {
             item.layer.borderWidth = 2.0
             item.layer.cornerRadius = 5
             item.isEnabled = false
+            item.textColor = UIColor.black
             item.backgroundColor = UIColor.clear
         }
     }
@@ -408,8 +409,10 @@ class ViewController: UIViewController {
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    self.clearTextFields()
                    self.makeTextFieldSelected(pos: 1)
-                   self.initializeDefaultKeyboard()
                    self.randomWord = self.loadWords()
+                   self.initializeDefaultKeyboard()
+                   self.initializeDefaultTextField()
+                   self.count = 1
                }))
             self.present(alert, animated: true, completion: nil)
 
