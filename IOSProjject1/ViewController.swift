@@ -405,8 +405,7 @@ class ViewController: UIViewController {
         
         //matching random word with user input
         if(randomWord == myFirstWord){
-            let alert = UIAlertController(title: "Correct word: \(randomWord)",
-                                          message: "\nSo close! Better luck next time ", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Congratulations!", message: "You successfully guessed the word!", preferredStyle: UIAlertController.Style.alert)
                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                    self.clearTextFields()
                    self.makeTextFieldSelected(pos: 1)
