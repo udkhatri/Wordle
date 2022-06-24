@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var B: UIButton!
     @IBOutlet weak var N: UIButton!
     @IBOutlet weak var M: UIButton!
+    
     // submit and back button
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var btnBack: UIButton!
@@ -175,26 +176,29 @@ class ViewController: UIViewController {
         var fiveLetterWordArray:[String]?
         var result = ""
         //if you get access to the directory
-        if let fileLocation = Bundle.main.url(forResource: "fiveLetterWords", withExtension: "txt"){
-            
+        if let fileLocation = Bundle.main.url(forResource: "fiveLetterWords", withExtension: "txt")
+        {
             // do catch in case of an error
-            do{
-
+            do
+            {
                 result = try String(contentsOf: fileLocation, encoding: .utf8)
             }
-            catch{
+            catch
+            {
                 print(error)
             }
             fiveLetterWordArray = result.components(separatedBy: "\n")
         }
         
         let randomWordIndex = Int.random(in: 0..<5756)
-        //returns a random word in form of a string
+        //returns a random word in form of a string or a default one in case it breaks
         return fiveLetterWordArray?[randomWordIndex] ?? "money"
         }
     
-    func initializeDefaultTextField(){
-        for (pos,item) in dictOfTextFields {
+    func initializeDefaultTextField()
+    {
+        for (_,item) in dictOfTextFields
+        {
             item.layer.borderColor = UIColor.lightGray.cgColor
             item.layer.borderWidth = 2.0
             item.layer.cornerRadius = 5
@@ -203,23 +207,31 @@ class ViewController: UIViewController {
             item.backgroundColor = UIColor.clear
         }
     }
-    func initializeDefaultKeyboard(){
-        for (pos,item) in dictOfKeyboardBtn {
+    
+    func initializeDefaultKeyboard()
+    {
+        for (_,item) in dictOfKeyboardBtn
+        {
             item.tintColor = UIColor.gray
         }
         btnBack.tintColor = UIColor.gray
     }
-    func makeTextFieldSelected(pos: Int){
+    
+    func makeTextFieldSelected(pos: Int)
+    {
         dictOfTextFields[pos]?.layer.borderColor = UIColor.darkGray.cgColor
-        
     }
-    @IBAction func keyboardKeyPressed(_ sender: UIButton) {
+    
+    @IBAction func keyboardKeyPressed(_ sender: UIButton)
+    {
 //       Code to handle keypress will go here
         var isErase: Bool = false
         
         var key: String = "A";
-        if(!btnSubmit.isEnabled){
-        switch sender.tag{
+        if(!btnSubmit.isEnabled)
+        {
+        switch sender.tag
+            {
         case 1: // Q
             key = "Q"
             break;
@@ -305,202 +317,230 @@ class ViewController: UIViewController {
         default:
             key = ""
             break;
-        }
+            }
         
         writeToGuess(word: key, isErase: isErase)
         }
-//        if submit button is enabled and pressed delete then again disable submit button and delete last element from selectedWord
-        else if(btnSubmit.isEnabled && sender.tag == 27 && selectedWord.count == 5){
+//   if submit button is enabled and pressed delete then again disable submit button and delete last element from selectedWord
+        else if(btnSubmit.isEnabled && sender.tag == 27 && selectedWord.count == 5)
+        {
             writeToGuess(word: "", isErase: true)
-            if(selectedWord.count != 5){
+            if(selectedWord.count != 5)
+            {
                 btnSubmit.isEnabled = false
             }
         }
     }
     
-    @IBAction func submitButton(_ sender: Any) {
+    @IBAction func submitButton(_ sender: Any)
+    {
         // Calling the viewDidLoad methods to "refresh" the VC
         print("Submit pressed",selectedWord)
         btnSubmit.isEnabled = false
         //Main Logic for comparison and coloring
-        let myFirstWord = selectedWord.joined(separator: "").lowercased()
-        let myFirstWordArray = Array(myFirstWord)
+        let wordGuess = selectedWord.joined(separator: "").lowercased()
+        let wordGuessArray = Array(wordGuess)
         let randomWordArray = Array(randomWord)
-        var testArray = randomWordArray
+        var remainingLettersArray = randomWordArray
         var GreenLetters: [Int:Character] = [:]
         var RedLetters: [Int:Character] = [:]
         var OrangeLetters: [Int:Character] = [:]
         var UnknownLetters: [Int: Character] = [:]
-        if(dictOfTextFields[30]?.text == ""){
+        
+        if(dictOfTextFields[30]?.text == "")
+        {
             
             // itterating first time and assigning collors to ones that are at right position and ones that are not in the word
-            for i in 0...myFirstWordArray.count-1 {
+            for i in 0...wordGuessArray.count-1
+            {
                 print("count+ i : ",count+i)
-                if myFirstWordArray[i] == randomWordArray[i] {
+                if wordGuessArray[i] == randomWordArray[i]
+                {
                     dictOfTextFields[count+i]?.isEnabled = true
                     dictOfTextFields[count+i]?.backgroundColor = UIColor.blue
                     dictOfTextFields[count+i]?.isEnabled = false
                     dictOfTextFields[count+i]?.textColor = UIColor.white
                     dictOfTextFields[count+i]?.layer.borderWidth = 0.0
-                    dictOfKeyboardBtn[myFirstWordArray[i]]?.tintColor = UIColor.blue
-                    GreenLetters.updateValue(myFirstWordArray[i], forKey: i)
-                    testArray[i] = " "
+                    dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.blue
+                    GreenLetters.updateValue(wordGuessArray[i], forKey: i)
+                    remainingLettersArray[i] = " "
                 }
-                else if randomWordArray.contains(myFirstWordArray[i]){
-                    UnknownLetters.updateValue(myFirstWordArray[i], forKey: i)
-                    RedLetters.updateValue(myFirstWordArray[i], forKey: i)
-              }
-                else{
+                else if randomWordArray.contains(wordGuessArray[i])
+                {
+                    UnknownLetters.updateValue(wordGuessArray[i], forKey: i)
+                    RedLetters.updateValue(wordGuessArray[i], forKey: i)
+                }
+                else
+                {
                     dictOfTextFields[count+i]?.isEnabled = true
                     dictOfTextFields[count+i]?.backgroundColor = UIColor.darkGray
                     dictOfTextFields[count+i]?.isEnabled = false
                     dictOfTextFields[count+i]?.textColor = UIColor.white
                     dictOfTextFields[count+i]?.layer.borderWidth = 0.0
-                    dictOfKeyboardBtn[myFirstWordArray[i]]?.tintColor = UIColor.darkGray
-                    RedLetters.updateValue(myFirstWordArray[i], forKey: i)
+                    dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.darkGray
+                    RedLetters.updateValue(wordGuessArray[i], forKey: i)
                 }
             }
                         // itterating through unknown letters and sorting them to orange ones that are out of place
-            for number in 0...4{
-                for secondNumber in 0...4{
+            for number in 0...4
+            {
+                for secondNumber in 0...4
+                {
                     let unknownLetter = UnknownLetters[secondNumber] ?? "^"
-                    if  testArray[number] == unknownLetter && testArray[number] != " "{
-                        // just some testing, we may still need it
-                        print("Test array value \(testArray[number])")
-                        print("Unknown letter value \(unknownLetter)")
-                        print("Index aka number is \(number)")
-
-
+                    
+                    if  remainingLettersArray[number] == unknownLetter && remainingLettersArray[number] != " "
+                    {
                         dictOfTextFields[secondNumber+count]?.isEnabled = true
                         dictOfTextFields[secondNumber+count]?.backgroundColor = UIColor.orange
                         dictOfTextFields[secondNumber+count]?.isEnabled = false
                         dictOfTextFields[secondNumber+count]?.textColor = UIColor.white
                         dictOfTextFields[secondNumber+count]?.layer.borderWidth = 0.0
-                        dictOfKeyboardBtn[testArray[number]]?.tintColor = UIColor.orange
+                        dictOfKeyboardBtn[remainingLettersArray[number]]?.tintColor = UIColor.orange
                         OrangeLetters.updateValue(unknownLetter, forKey: secondNumber)
                         UnknownLetters.removeValue(forKey: secondNumber)
-                        testArray[number] = " "
-                        // same here, checking the status after each itteration
-                        print("My test array \(testArray)")
-                        print("These are orange now \(OrangeLetters)")
-                        print("These are still unknown \(UnknownLetters)")
-
+                        remainingLettersArray[number] = " "
                     }
                 }
-//                 last itteration to put the remaining letters to right color, might want to add it to dictionary in the future
-                for (key,_) in UnknownLetters {
-                    dictOfTextFields[key+count]?.isEnabled = true
-                    dictOfTextFields[key+count]?.backgroundColor = UIColor.darkGray
-                    dictOfTextFields[key+count]?.isEnabled = false
-                    dictOfTextFields[key+count]?.textColor = UIColor.white
-                    dictOfTextFields[key+count]?.layer.borderWidth = 0.0
-                }
+//   last itteration to put the remaining letters to right color, might want to add it to dictionary in the future
+            }
+            for (key,_) in UnknownLetters {
+                dictOfTextFields[key+count]?.isEnabled = true
+                dictOfTextFields[key+count]?.backgroundColor = UIColor.darkGray
+                dictOfTextFields[key+count]?.isEnabled = false
+                dictOfTextFields[key+count]?.textColor = UIColor.white
+                dictOfTextFields[key+count]?.layer.borderWidth = 0.0
+                RedLetters.updateValue(UnknownLetters[key] ?? " ", forKey: key)
             }
             count = count + 5
-
         }
-      
-        
         //End of Logic for coloring guessed letters
         
+        
         //matching random word with user input
-        if(randomWord == myFirstWord){
-            let alert = UIAlertController(title: "Congratulations!", message: "You successfully guessed the word!", preferredStyle: UIAlertController.Style.alert)
-               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                   self.clearTextFields()
-                   self.makeTextFieldSelected(pos: 1)
-                   self.randomWord = self.loadWords()
-                   self.initializeDefaultKeyboard()
-                   self.initializeDefaultTextField()
-                   self.count = 1
-               }))
+        if(randomWord == wordGuess)
+        {
+            let alert = UIAlertController(
+                    title: "Congratulations!",
+                    message: "You successfully guessed the word!",
+                    preferredStyle: UIAlertController.Style.alert)
+            
+               alert.addAction(UIAlertAction(
+                    title: "Play Again!",
+                    style: UIAlertAction.Style.default,
+                    handler:
+                        {
+                            (action:UIAlertAction!) in
+                        self.clearTextFields()
+                        self.makeTextFieldSelected(pos: 1)
+                        self.randomWord = self.loadWords()
+                        self.initializeDefaultKeyboard()
+                        self.initializeDefaultTextField()
+                        self.count = 1
+                        }
+               ))
+            
             self.present(alert, animated: true, completion: nil)
 
-        }else if(dictOfTextFields[30]?.text != ""){
-            let alert = UIAlertController(title: "Correct word: \(randomWord)",
-                                          message: "\nSo close! Better luck next time ", preferredStyle: UIAlertController.Style.alert)
-               alert.addAction(UIAlertAction(title: "Play Again?", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                   self.clearTextFields()
-                   self.makeTextFieldSelected(pos: 1)
-                   self.randomWord = self.loadWords()
-                   print("New word is \(self.randomWord)")
-               }))
+        }
+        else if(dictOfTextFields[30]?.text != "")
+        {
+            let alert = UIAlertController(
+                title: "Correct word: \(randomWord)",
+                message: "\nSo close! Better luck next time ",
+                preferredStyle: UIAlertController.Style.alert)
+               alert.addAction(UIAlertAction(
+                title: "Play Again?",
+                style: UIAlertAction.Style.default,
+                handler:
+                    {(action:UIAlertAction!) in
+                        self.clearTextFields()
+                        self.makeTextFieldSelected(pos: 1)
+                        self.randomWord = self.loadWords()
+                        print("New word is \(self.randomWord)")
+                    }
+                ))
             
+                self.present(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert = UIAlertController(
+                title: title,
+                message: "Word doesn't match, Please Try again",
+                preferredStyle: UIAlertController.Style.alert)
             
-            self.present(alert, animated: true, completion: nil)
-        }else{
-            let alert = UIAlertController(title: title, message: "Word doesn't match, Please Try again", preferredStyle: UIAlertController.Style.alert)
-               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                   print("Action")
-
-               }))
-            self.present(alert, animated: true, completion: nil)
+               alert.addAction(UIAlertAction(
+                title: "Ok",
+                style: UIAlertAction.Style.default,
+                handler:
+                    {(action:UIAlertAction!) in
+                        print("Action")
+                    }
+              ))
+            
+              self.present(alert, animated: true, completion: nil)
         }
         selectedWord.removeAll()
-        if(dictOfTextFields[30]?.text != ""){
+        
+        if(dictOfTextFields[30]?.text != "")
+        {
             initializeDefaultKeyboard()
             initializeDefaultTextField()
             count = 1
         }
-        //resetting game
-//        if(!(dictOfTextFields[30]?.text?.isEmpty ?? false)){
-//            clearTextFields()
-//            makeTextFieldSelected(pos: 1)
-//
-//        }
-        
     }
     
-    func writeToGuess(word: String, isErase: Bool){
+    func writeToGuess(word: String, isErase: Bool)
+    {
         
-        if(isErase && selectedTFcoutRef >= 1 ){
-            if(selectedTFcoutRef > 1){
-                if(!selectedWord.isEmpty){
+        if(isErase && selectedTFcoutRef >= 1 )
+        {
+            if(selectedTFcoutRef > 1)
+            {
+                if(!selectedWord.isEmpty)
+                {
                     selectedTFcoutRef -= 1
-//                    initializeDefaultTextField()
                     makeTextFieldSelected(pos: selectedTFcoutRef)
                     dictOfTextFields[selectedTFcoutRef]?.text = ""
 //                    remove last word from selected array
-                    let last = selectedWord.popLast() ?? "Empty array"
+                    _ = selectedWord.popLast() ?? "Empty array"
                 }
                 
-            }else{
-//                initializeDefaultTextField()
+            }
+            else
+            {
                 makeTextFieldSelected(pos: 1)
                 selectedTFcoutRef = 1
                 dictOfTextFields[selectedTFcoutRef]?.text = ""
-
             }
             
         }
-        else if (!isErase &&  selectedTFcoutRef >= 1){
+        else if (!isErase &&  selectedTFcoutRef >= 1)
+        {
             dictOfTextFields[selectedTFcoutRef]?.text = word
             selectedTFcoutRef += 1
-//            initializeDefaultTextField()
             makeTextFieldSelected(pos: selectedTFcoutRef)
-            //            we can change background color of specific text field here
             selectedWord.append(word)
-
         }
-        //        If user fills all the words of the guess, disable all the text fields
-                if(selectedWord.count == 5){
-//                    initializeDefaultTextField()
+        //   If user fills all the words of the guess, disable all the text fields
+                if(selectedWord.count == 5)
+                {
                     btnSubmit.isEnabled = true
                 }
-        
     }
-    func clearTextFields(){
-            for (pos,item) in dictOfTextFields {
+    
+    func clearTextFields()
+    {
+        for (_,item) in dictOfTextFields
+        {
                 item.layer.borderColor = UIColor.lightGray.cgColor
                 item.layer.borderWidth = 2.0
                 item.layer.cornerRadius = 5
                 item.isEnabled = false
                 item.text = ""
-            }
+        }
         selectedTFcoutRef = 1
 
-        }
- 
-    
+    }
 }
 
