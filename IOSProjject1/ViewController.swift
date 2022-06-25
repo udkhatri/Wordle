@@ -403,7 +403,6 @@ class ViewController: UIViewController {
             }
             for (key,_) in UnknownLetters {
                 changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.darkGray, pos: key)
-                dictOfKeyboardBtn[UnknownLetters[key] ?? " "]?.tintColor = UIColor.darkGray
                 RedLetters.updateValue(UnknownLetters[key] ?? " ", forKey: key)
             }
             count = count + 5
