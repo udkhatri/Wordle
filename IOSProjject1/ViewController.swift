@@ -332,6 +332,28 @@ class ViewController: UIViewController {
         }
     }
     
+    func changeTxtFieldClrArr(textFieldBackgroundColor: UIColor,  pos: Int)
+    {
+        dictOfTextFields[count+pos]?.isEnabled = true
+        dictOfTextFields[count+pos]?.backgroundColor = textFieldBackgroundColor
+        dictOfTextFields[count+pos]?.isEnabled = false
+        dictOfTextFields[count+pos]?.textColor = UIColor.white
+        dictOfTextFields[count+pos]?.layer.borderWidth = 0.0
+    }
+    
+    func changeBtnTintClrDic(buttonColor: UIColor? = nil, textFieldBackgroundColor: UIColor, btnTextColor: UIColor, counter: Int, wordDic: Dictionary<Int, Character>)
+    {
+        
+        dictOfTextFields[count+counter]?.isEnabled = true
+        dictOfTextFields[count+counter]?.backgroundColor = textFieldBackgroundColor
+        dictOfTextFields[count+counter]?.isEnabled = false
+        dictOfTextFields[count+counter]?.textColor = btnTextColor
+        dictOfTextFields[count+counter]?.layer.borderWidth = 0.0
+        if(buttonColor != nil){
+            dictOfKeyboardBtn[wordDic[counter]!]?.tintColor = buttonColor
+        }
+    }
+    
     @IBAction func submitButton(_ sender: Any)
     {
         // Calling the viewDidLoad methods to "refresh" the VC
@@ -356,11 +378,7 @@ class ViewController: UIViewController {
                 print("count+ i : ",count+i)
                 if wordGuessArray[i] == randomWordArray[i]
                 {
-                    dictOfTextFields[count+i]?.isEnabled = true
-                    dictOfTextFields[count+i]?.backgroundColor = UIColor.blue
-                    dictOfTextFields[count+i]?.isEnabled = false
-                    dictOfTextFields[count+i]?.textColor = UIColor.white
-                    dictOfTextFields[count+i]?.layer.borderWidth = 0.0
+                    changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.blue, pos: i)
                     dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.blue
                     GreenLetters.updateValue(wordGuessArray[i], forKey: i)
                     remainingLettersArray[i] = " "
@@ -372,11 +390,7 @@ class ViewController: UIViewController {
                 }
                 else
                 {
-                    dictOfTextFields[count+i]?.isEnabled = true
-                    dictOfTextFields[count+i]?.backgroundColor = UIColor.darkGray
-                    dictOfTextFields[count+i]?.isEnabled = false
-                    dictOfTextFields[count+i]?.textColor = UIColor.white
-                    dictOfTextFields[count+i]?.layer.borderWidth = 0.0
+                    changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.darkGray, pos: i)
                     dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.darkGray
                     RedLetters.updateValue(wordGuessArray[i], forKey: i)
                 }
@@ -390,11 +404,7 @@ class ViewController: UIViewController {
                     
                     if  remainingLettersArray[number] == unknownLetter && remainingLettersArray[number] != " "
                     {
-                        dictOfTextFields[secondNumber+count]?.isEnabled = true
-                        dictOfTextFields[secondNumber+count]?.backgroundColor = UIColor.orange
-                        dictOfTextFields[secondNumber+count]?.isEnabled = false
-                        dictOfTextFields[secondNumber+count]?.textColor = UIColor.white
-                        dictOfTextFields[secondNumber+count]?.layer.borderWidth = 0.0
+                        changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.orange, pos: secondNumber)
                         dictOfKeyboardBtn[remainingLettersArray[number]]?.tintColor = UIColor.orange
                         OrangeLetters.updateValue(unknownLetter, forKey: secondNumber)
                         UnknownLetters.removeValue(forKey: secondNumber)
@@ -404,11 +414,8 @@ class ViewController: UIViewController {
 //   last itteration to put the remaining letters to right color, might want to add it to dictionary in the future
             }
             for (key,_) in UnknownLetters {
-                dictOfTextFields[key+count]?.isEnabled = true
-                dictOfTextFields[key+count]?.backgroundColor = UIColor.darkGray
-                dictOfTextFields[key+count]?.isEnabled = false
-                dictOfTextFields[key+count]?.textColor = UIColor.white
-                dictOfTextFields[key+count]?.layer.borderWidth = 0.0
+                changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.darkGray, pos: key)
+                dictOfKeyboardBtn[UnknownLetters[key] ?? " "]?.tintColor = UIColor.darkGray
                 RedLetters.updateValue(UnknownLetters[key] ?? " ", forKey: key)
             }
             count = count + 5
