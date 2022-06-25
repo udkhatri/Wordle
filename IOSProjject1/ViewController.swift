@@ -341,18 +341,6 @@ class ViewController: UIViewController {
         dictOfTextFields[count+pos]?.layer.borderWidth = 0.0
     }
     
-    func changeBtnTintClrDic(buttonColor: UIColor? = nil, textFieldBackgroundColor: UIColor, btnTextColor: UIColor, counter: Int, wordDic: Dictionary<Int, Character>)
-    {
-        
-        dictOfTextFields[count+counter]?.isEnabled = true
-        dictOfTextFields[count+counter]?.backgroundColor = textFieldBackgroundColor
-        dictOfTextFields[count+counter]?.isEnabled = false
-        dictOfTextFields[count+counter]?.textColor = btnTextColor
-        dictOfTextFields[count+counter]?.layer.borderWidth = 0.0
-        if(buttonColor != nil){
-            dictOfKeyboardBtn[wordDic[counter]!]?.tintColor = buttonColor
-        }
-    }
     
     @IBAction func submitButton(_ sender: Any)
     {
