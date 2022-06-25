@@ -332,31 +332,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func changeColorArr(buttonColor: UIColor? = nil, textFieldBackgroundColor: UIColor, btnTextColor: UIColor, counter: Int, wordArray: Array<Character>)
+    func changeTxtFieldClrArr(textFieldBackgroundColor: UIColor,  pos: Int)
     {
-        
-        dictOfTextFields[count+counter]?.isEnabled = true
-        dictOfTextFields[count+counter]?.backgroundColor = textFieldBackgroundColor
-        dictOfTextFields[count+counter]?.isEnabled = false
-        dictOfTextFields[count+counter]?.textColor = btnTextColor
-        dictOfTextFields[count+counter]?.layer.borderWidth = 0.0
-        if(buttonColor != nil){
-            dictOfKeyboardBtn[wordArray[counter]]?.tintColor = buttonColor
-        }
+        dictOfTextFields[count+pos]?.isEnabled = true
+        dictOfTextFields[count+pos]?.backgroundColor = textFieldBackgroundColor
+        dictOfTextFields[count+pos]?.isEnabled = false
+        dictOfTextFields[count+pos]?.textColor = UIColor.white
+        dictOfTextFields[count+pos]?.layer.borderWidth = 0.0
     }
     
-    func changeColorDic(buttonColor: UIColor? = nil, textFieldBackgroundColor: UIColor, btnTextColor: UIColor, counter: Int, wordDic: Dictionary<Int, Character>)
-    {
-        
-        dictOfTextFields[count+counter]?.isEnabled = true
-        dictOfTextFields[count+counter]?.backgroundColor = textFieldBackgroundColor
-        dictOfTextFields[count+counter]?.isEnabled = false
-        dictOfTextFields[count+counter]?.textColor = btnTextColor
-        dictOfTextFields[count+counter]?.layer.borderWidth = 0.0
-        if(buttonColor != nil){
-            dictOfKeyboardBtn[wordDic[counter]!]?.tintColor = buttonColor
-        }
-    }
     
     @IBAction func submitButton(_ sender: Any)
     {
@@ -376,13 +360,14 @@ class ViewController: UIViewController {
         if(dictOfTextFields[30]?.text == "")
         {
             
-            // itterating first time and assigning collors to ones that are at right position and ones that are not in the word bckclr blue, text white tint blue
+            // itterating first time and assigning collors to ones that are at right position and ones that are not in the word
             for i in 0...wordGuessArray.count-1
             {
                 print("count+ i : ",count+i)
                 if wordGuessArray[i] == randomWordArray[i]
                 {
-                    changeColorArr(buttonColor: UIColor.blue, textFieldBackgroundColor: UIColor.blue, btnTextColor: UIColor.white, counter: i, wordArray: wordGuessArray)
+                    changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.blue, pos: i)
+                    dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.blue
                     GreenLetters.updateValue(wordGuessArray[i], forKey: i)
                     remainingLettersArray[i] = " "
                 }
@@ -393,10 +378,9 @@ class ViewController: UIViewController {
                 }
                 else
                 {
-                    // background
-                    changeColorArr(buttonColor: UIColor.darkGray, textFieldBackgroundColor: UIColor.darkGray, btnTextColor: UIColor.white, counter: i, wordArray: wordGuessArray)
+                    changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.darkGray, pos: i)
+                    dictOfKeyboardBtn[wordGuessArray[i]]?.tintColor = UIColor.darkGray
                     RedLetters.updateValue(wordGuessArray[i], forKey: i)
-                    remainingLettersArray[i] = " "
                 }
             }
                         // itterating through unknown letters and sorting them to orange ones that are out of place
@@ -408,7 +392,8 @@ class ViewController: UIViewController {
                     
                     if  remainingLettersArray[number] == unknownLetter && remainingLettersArray[number] != " "
                     {
-                        changeColorArr(buttonColor: UIColor.orange, textFieldBackgroundColor: UIColor.orange, btnTextColor: UIColor.white, counter: secondNumber, wordArray: remainingLettersArray)
+                        changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.orange, pos: secondNumber)
+                        dictOfKeyboardBtn[remainingLettersArray[number]]?.tintColor = UIColor.orange
                         OrangeLetters.updateValue(unknownLetter, forKey: secondNumber)
                         UnknownLetters.removeValue(forKey: secondNumber)
                         remainingLettersArray[number] = " "
@@ -417,7 +402,8 @@ class ViewController: UIViewController {
 //   last itteration to put the remaining letters to right color, might want to add it to dictionary in the future
             }
             for (key,_) in UnknownLetters {
-                changeColorDic(textFieldBackgroundColor: UIColor.darkGray, btnTextColor: UIColor.white, counter: key, wordDic: UnknownLetters)
+                changeTxtFieldClrArr(textFieldBackgroundColor: UIColor.darkGray, pos: key)
+                dictOfKeyboardBtn[UnknownLetters[key] ?? " "]?.tintColor = UIColor.darkGray
                 RedLetters.updateValue(UnknownLetters[key] ?? " ", forKey: key)
             }
             count = count + 5
