@@ -64,7 +64,7 @@
 ### :camera: Image to demonstrate rules
 <div style="height:400px">
  <img src="https://user-images.githubusercontent.com/34532828/190878435-de946731-16de-4894-ac9a-acae95ae83a5.png" style="height:600px" />
-
+ - Note that this image is taken just for the referrence UI and colors for the application is bit different.
 </div>
 
 ## To clone
