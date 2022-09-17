@@ -62,10 +62,10 @@
         - You should get a message telling you what the correct word was
 
 ### :camera: Image to demonstrate rules
-<div style="height:400px">
+
  <img src="https://user-images.githubusercontent.com/34532828/190878435-de946731-16de-4894-ac9a-acae95ae83a5.png" style="height:600px" />
- - Note that this image is taken just for the referrence UI and colors for the application is bit different.
-</div>
+
+- Note that this image is taken just for the referrence. UI and colors for the application is bit different.
 
 ## To clone
 > To clone and run this application, you'll need [Git](https://git-scm.com) and [Xcode](https://developer.apple.com/xcode/) installed on your computer. From your command line:
