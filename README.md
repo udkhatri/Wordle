@@ -3,7 +3,7 @@
   <h1>Technical quiz application</h1>
   
   <p>
-    Quiz application for iOS using Swift and UIKit in agile development methodology in which users can test their technical skills, view their scores and improve their skills by completing new quizzes.
+    Wordle game for ios
   </p>
   
 </div>
