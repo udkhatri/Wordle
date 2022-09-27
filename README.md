@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1>Technical quiz application</h1>
+  <h1>Wordle</h1>
   
   <p>
     Wordle game for ios
